@@ -2,6 +2,7 @@ import { Routes, Route } from 'react-router-dom';
 import './App.css';
 import Header from './components/Header/Header';
 import Listings from './components/Listings/Listings';
+import Profile from './components/Profile/Profile';
 
 // Import types
 // import type { Device } from './types/types';
@@ -29,6 +30,7 @@ const App = () => {
       <Header />
       <Routes>
         <Route path="/adopt" element={<Listings />}></Route>
+        <Route path="/profile/:id" element={<Profile />}></Route>
       </Routes>
     </>
   );

@@ -3,6 +3,7 @@ import { useState, useMemo } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faVenus, faMars, faHeart } from '@fortawesome/free-solid-svg-icons';
 import { faHeart as farHeart } from '@fortawesome/free-regular-svg-icons';
+import { useNavigate } from 'react-router-dom';
 
 const Listings = () => {
   const [selectedSpecies, setSelectedSpecies] = useState('All');
@@ -12,9 +13,7 @@ const Listings = () => {
   const [goodWithKids, setGoodWithKids] = useState<boolean | null>(null);
   const [goodWithOtherPets, setGoodWithOtherPets] = useState<boolean | null>(null);
 
-  // useEffect(() => {
-  //   console.log(`Line 14 the selected species is ${selectedGender}`);
-  // }, [selectedGender]);
+  const navigate = useNavigate();
 
   type Pet = {
     id: string;
@@ -27,6 +26,8 @@ const Listings = () => {
     state: 'SA' | 'VIC' | 'NSW' | 'QLD' | 'WA' | 'TAS'; // since you said it's always shortened
     kidsFriendly: boolean;
     otherPetsFriendly: boolean;
+    postedBy: string;
+    postedAt: string;
     favorite: boolean;
     description: string;
   };
@@ -44,6 +45,8 @@ const Listings = () => {
         state: 'SA',
         kidsFriendly: true,
         otherPetsFriendly: true,
+        postedBy: 'Jane Miller',
+        postedAt: '2026-01-01',
         favorite: true,
         description:
           'Max is a bubbly and friendly cat that loves to jump around and give everyone cuddles. The sun dipped below the horizon, casting a warm orange glow over the quiet town. Birds chirped softly in the distance as a gentle breeze rustled the leaves, carrying the faint scent of blooming flowers. Somewhere down the cobblestone streets, laughter echoed, hinting at stories unfolding behind closed doors. For a moment, everything felt peaceful, like time itself had paused to admire the evening.',
@@ -59,6 +62,8 @@ const Listings = () => {
         state: 'VIC',
         kidsFriendly: true,
         otherPetsFriendly: true,
+        postedBy: 'Jane Miller',
+        postedAt: '2026-01-01',
         favorite: false,
         description:
           'Max is a bubbly and friendly cat that loves to jump around and give everyone cuddles. The sun dipped below the horizon, casting a warm orange glow over the quiet town. Birds chirped softly in the distance as a gentle breeze rustled the leaves, carrying the faint scent of blooming flowers. Somewhere down the cobblestone streets, laughter echoed, hinting at stories unfolding behind closed doors. For a moment, everything felt peaceful, like time itself had paused to admire the evening.',
@@ -74,6 +79,8 @@ const Listings = () => {
         state: 'QLD',
         kidsFriendly: false,
         otherPetsFriendly: true,
+        postedBy: 'Jane Miller',
+        postedAt: '2026-01-01',
         favorite: false,
         description:
           'Max is a bubbly and friendly cat that loves to jump around and give everyone cuddles. The sun dipped below the horizon, casting a warm orange glow over the quiet town. Birds chirped softly in the distance as a gentle breeze rustled the leaves, carrying the faint scent of blooming flowers. Somewhere down the cobblestone streets, laughter echoed, hinting at stories unfolding behind closed doors. For a moment, everything felt peaceful, like time itself had paused to admire the evening.',
@@ -89,6 +96,8 @@ const Listings = () => {
         state: 'NSW',
         kidsFriendly: false,
         otherPetsFriendly: true,
+        postedBy: 'Jane Miller',
+        postedAt: '2026-01-01',
         favorite: false,
         description:
           'Max is a bubbly and friendly rabbit that loves to jump around and give everyone cuddles. The sun dipped below the horizon, casting a warm orange glow over the quiet town. Birds chirped softly in the distance as a gentle breeze rustled the leaves, carrying the faint scent of blooming flowers. Somewhere down the cobblestone streets, laughter echoed, hinting at stories unfolding behind closed doors. For a moment, everything felt peaceful, like time itself had paused to admire the evening.',
@@ -104,6 +113,8 @@ const Listings = () => {
         state: 'SA',
         kidsFriendly: true,
         otherPetsFriendly: false,
+        postedBy: 'Jane Miller',
+        postedAt: '2026-01-01',
         favorite: false,
         description:
           'Max is a bubbly and friendly rabbit that loves to jump around and give everyone cuddles',
@@ -119,6 +130,8 @@ const Listings = () => {
         state: 'TAS',
         kidsFriendly: true,
         otherPetsFriendly: false,
+        postedBy: 'Jane Miller',
+        postedAt: '2026-01-01',
         favorite: false,
         description:
           'Max is a bubbly and friendly rabbit that loves to jump around and give everyone cuddles. The sun dipped below the horizon, casting a warm orange glow over the quiet town. Birds chirped softly in the distance as a gentle breeze rustled the leaves, carrying the faint scent of blooming flowers. Somewhere down the cobblestone streets, laughter echoed, hinting at stories unfolding behind closed doors. For a moment, everything felt peaceful, like time itself had paused to admire the evening.',
@@ -248,7 +261,9 @@ const Listings = () => {
   // });
   // };
 
-  // console.log(`Line 193 the filtered pet is ${JSON.stringify(filteredPets, null, 2)}`);
+  const handleGoToPetProfile = (id: string) => {
+    navigate(`/profile/${id}`);
+  };
 
   return (
     <div className="listings-container">
@@ -442,7 +457,9 @@ const Listings = () => {
                 <span className="location-icon">📍</span> {pet.suburb + ', ' + pet.state}
               </p>
               <p className="pet-description">{pet.description}</p>
-              <button className="view-more-btn">View More</button>
+              <button className="view-more-btn" onClick={() => handleGoToPetProfile(pet.id)}>
+                View More
+              </button>
             </div>
           </div>
         ))}
