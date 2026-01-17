@@ -22,7 +22,7 @@ const Header = () => {
               <Link to="/adopt">Adopt</Link>
             </li>
             <li>
-              <a href="#create">Create Listing</a>
+              <Link to="/new">Create Listing</Link>
             </li>
             <li>
               <a href="#enquiries">Enquiries</a>
