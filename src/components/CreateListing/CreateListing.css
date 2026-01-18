@@ -230,6 +230,30 @@ select {
   transition: background-color 0.3s;
 }
 
+.create-listing-preview-container {
+  display: flex;
+  background-color: #FFFFFF;
+  border-radius: var(--border-radius);
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.preview-img-summary-container {
+  padding: 1rem;
+  font-size: 12px;
+  text-align: center;
+  color: #605454;
+}
+
+.preview-img-container {
+
+}
+
+.preview-img {
+  width: 250px;
+  border-radius: var(--border-radius);
+}
+
 @media (max-width: 600px) {
   .form-grid {
     grid-template-columns: 1fr;

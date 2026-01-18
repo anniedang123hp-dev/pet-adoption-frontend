@@ -1,18 +1,30 @@
 import type { Dispatch, SetStateAction } from 'react';
+import { useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPaw, faBriefcaseMedical, faLocationDot } from '@fortawesome/free-solid-svg-icons';
 
 import { faFileLines } from '@fortawesome/free-regular-svg-icons';
+import type { PetFormData } from '../../types/petForm';
 
 interface props {
   setStep: Dispatch<SetStateAction<number>>;
+  formData: PetFormData;
+  setFormData: Dispatch<SetStateAction<PetFormData>>;
 }
 
-const BasicInfo = ({ setStep }: props) => {
+const BasicInfo = ({ setStep, setFormData, formData }: props) => {
   const handleStep = () => {
     setStep(1);
     console.log(`Go to 2nd step`);
   };
+
+  const handleChange = (field: string, value: string) => {
+    setFormData((prev) => ({
+      ...prev,
+      [field]: value,
+    }));
+  };
+
   return (
     <div className="create-listing-container">
       {/* Progress Steps */}
@@ -84,21 +96,31 @@ const BasicInfo = ({ setStep }: props) => {
           <label>
             Pet Name <span className="create-listing-required">*</span>
           </label>
-          <input type="text" placeholder="Enter your pet name ..." />
+          <input
+            type="text"
+            placeholder="Enter your pet name ..."
+            onChange={(e) => handleChange('name', e.target.value)}
+            required
+          />
         </div>
 
         <div className="create-listing-form-group">
           <label>
             Species <span className="create-listing-required">*</span>
           </label>
-          <input type="text" placeholder="Enter your pet species ..." />
+          <input
+            type="text"
+            placeholder="Enter your pet species ..."
+            onChange={(e) => handleChange('species', e.target.value)}
+            required
+          />
         </div>
 
         <div className="create-listing-form-group">
           <label>
             Gender <span className="create-listing-required">*</span>
           </label>
-          <select>
+          <select onChange={(e) => handleChange('gender', e.target.value)} required>
             <option value="">Select</option>
             <option value="male">Male</option>
             <option value="female">Female</option>
@@ -109,7 +131,7 @@ const BasicInfo = ({ setStep }: props) => {
           <label>
             Age <span className="create-listing-required">*</span>
           </label>
-          <select>
+          <select onChange={(e) => handleChange('age', e.target.value)} required>
             <option value="">Select</option>
             <option value="puppy">Puppy/Kitten</option>
             <option value="young">Young</option>
@@ -122,7 +144,7 @@ const BasicInfo = ({ setStep }: props) => {
           <label>
             Breed <span className="create-listing-required">*</span>
           </label>
-          <select>
+          <select onChange={(e) => handleChange('breed', e.target.value)}>
             <option value="">Select</option>
             <option value="mixed">Mixed Breed</option>
             <option value="labrador">Labrador</option>
@@ -135,7 +157,12 @@ const BasicInfo = ({ setStep }: props) => {
           <label>
             Pet Story <span className="create-listing-required">*</span>
           </label>
-          <textarea placeholder="Tell us about your pet's personality, background, and what makes them special..."></textarea>
+          <textarea
+            placeholder="Tell us about your pet's personality, background, and what makes them special..."
+            onChange={(e) => handleChange('description', e.target.value)}
+            defaultValue={formData.description}
+            required
+          ></textarea>
           <div className="character-counter">
             <span className="counter-number">1</span>/
             <span className="counter-text">500 characters minimum</span>

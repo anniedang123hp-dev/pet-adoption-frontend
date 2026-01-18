@@ -2,9 +2,11 @@ import type { Dispatch, SetStateAction } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPaw, faBriefcaseMedical, faLocationDot } from '@fortawesome/free-solid-svg-icons';
 import { faFileLines } from '@fortawesome/free-regular-svg-icons';
+import type { PetFormData } from '../../types/petForm';
 
 interface props {
   setStep: Dispatch<SetStateAction<number>>;
+  setFormData: Dispatch<SetStateAction<PetFormData>>;
 }
 
 const BasicInfo = ({ setStep }: props) => {
