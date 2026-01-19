@@ -7,15 +7,23 @@ import type { PetFormData } from '../../types/petForm';
 interface props {
   setStep: Dispatch<SetStateAction<number>>;
   setFormData: Dispatch<SetStateAction<PetFormData>>;
+  formData: PetFormData;
 }
 
-const BasicInfo = ({ setStep }: props) => {
+const BasicInfo = ({ setStep, setFormData, formData }: props) => {
   const handleNextStep = () => {
     setStep(2);
   };
 
   const handlePrevStep = () => {
     setStep(0);
+  };
+
+  const handleChange = (field: string, value: string) => {
+    setFormData((prev) => ({
+      ...prev,
+      [field]: value === 'true',
+    }));
   };
   return (
     <div className="create-listing-container">
@@ -63,10 +71,13 @@ const BasicInfo = ({ setStep }: props) => {
           <label>
             Desexed <span className="create-listing-required">*</span>
           </label>
-          <select>
+          <select
+            onChange={(e) => handleChange('desexed', e.target.value)}
+            value={String(formData.desexed)}
+          >
             <option value="">Select</option>
-            <option value="yes">Yes</option>
-            <option value="no">No</option>
+            <option value="true">Yes</option>
+            <option value="false">No</option>
           </select>
         </div>
 
@@ -74,10 +85,13 @@ const BasicInfo = ({ setStep }: props) => {
           <label>
             Vaccinated <span className="create-listing-required">*</span>
           </label>
-          <select>
+          <select
+            onChange={(e) => handleChange('vaccinated', e.target.value)}
+            value={String(formData.vaccinated)}
+          >
             <option value="">Select</option>
-            <option value="yes">Yes</option>
-            <option value="no">No</option>
+            <option value="true">Yes</option>
+            <option value="false">No</option>
           </select>
         </div>
 
@@ -85,10 +99,13 @@ const BasicInfo = ({ setStep }: props) => {
           <label>
             Microchipped <span className="create-listing-required">*</span>
           </label>
-          <select>
+          <select
+            onChange={(e) => handleChange('microchipped', e.target.value)}
+            value={String(formData.microchipped)}
+          >
             <option value="">Select</option>
-            <option value="yes">Yes</option>
-            <option value="no">No</option>
+            <option value="true">Yes</option>
+            <option value="false">No</option>
           </select>
         </div>
 
@@ -96,10 +113,13 @@ const BasicInfo = ({ setStep }: props) => {
           <label>
             Flea & Worm Treated <span className="create-listing-required">*</span>
           </label>
-          <select>
+          <select
+            onChange={(e) => handleChange('fleaWormTreated', e.target.value)}
+            value={String(formData.fleaWormTreated)}
+          >
             <option value="">Select</option>
-            <option value="yes">Yes</option>
-            <option value="no">No</option>
+            <option value="true">Yes</option>
+            <option value="false">No</option>
           </select>
         </div>
 
@@ -107,10 +127,13 @@ const BasicInfo = ({ setStep }: props) => {
           <label>
             Good with kids <span className="create-listing-required">*</span>
           </label>
-          <select>
+          <select
+            onChange={(e) => handleChange('kidsFriendly', e.target.value)}
+            value={String(formData.kidsFriendly)}
+          >
             <option value="">Select</option>
-            <option value="yes">Yes</option>
-            <option value="no">No</option>
+            <option value="true">Yes</option>
+            <option value="false">No</option>
           </select>
         </div>
 
@@ -118,10 +141,13 @@ const BasicInfo = ({ setStep }: props) => {
           <label>
             Good with other pets <span className="create-listing-required">*</span>
           </label>
-          <select>
+          <select
+            onChange={(e) => handleChange('otherPetsFriendly', e.target.value)}
+            value={String(formData.otherPetsFriendly)}
+          >
             <option value="">Select</option>
-            <option value="yes">Yes</option>
-            <option value="no">No</option>
+            <option value="true">Yes</option>
+            <option value="false">No</option>
           </select>
         </div>
       </div>

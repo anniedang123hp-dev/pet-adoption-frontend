@@ -98,6 +98,7 @@ const BasicInfo = ({ setStep, setFormData, formData }: props) => {
           </label>
           <input
             type="text"
+            value={formData.name}
             placeholder="Enter your pet name ..."
             onChange={(e) => handleChange('name', e.target.value)}
             required
@@ -108,19 +109,27 @@ const BasicInfo = ({ setStep, setFormData, formData }: props) => {
           <label>
             Species <span className="create-listing-required">*</span>
           </label>
-          <input
-            type="text"
-            placeholder="Enter your pet species ..."
+          <select
             onChange={(e) => handleChange('species', e.target.value)}
+            value={formData.species}
             required
-          />
+          >
+            <option value="">Select</option>
+            <option value="dog">Dog</option>
+            <option value="cat">Cat</option>
+            <option value="other">Other</option>
+          </select>
         </div>
 
         <div className="create-listing-form-group">
           <label>
             Gender <span className="create-listing-required">*</span>
           </label>
-          <select onChange={(e) => handleChange('gender', e.target.value)} required>
+          <select
+            onChange={(e) => handleChange('gender', e.target.value)}
+            value={formData.gender}
+            required
+          >
             <option value="">Select</option>
             <option value="male">Male</option>
             <option value="female">Female</option>
@@ -131,7 +140,11 @@ const BasicInfo = ({ setStep, setFormData, formData }: props) => {
           <label>
             Age <span className="create-listing-required">*</span>
           </label>
-          <select onChange={(e) => handleChange('age', e.target.value)} required>
+          <select
+            onChange={(e) => handleChange('age', e.target.value)}
+            value={formData.age}
+            required
+          >
             <option value="">Select</option>
             <option value="puppy">Puppy/Kitten</option>
             <option value="young">Young</option>
@@ -144,13 +157,13 @@ const BasicInfo = ({ setStep, setFormData, formData }: props) => {
           <label>
             Breed <span className="create-listing-required">*</span>
           </label>
-          <select onChange={(e) => handleChange('breed', e.target.value)}>
-            <option value="">Select</option>
-            <option value="mixed">Mixed Breed</option>
-            <option value="labrador">Labrador</option>
-            <option value="german-shepherd">German Shepherd</option>
-            <option value="golden-retriever">Golden Retriever</option>
-          </select>
+          <input
+            type="text"
+            value={formData.breed}
+            placeholder="Enter your pet breed ..."
+            onChange={(e) => handleChange('breed', e.target.value)}
+            required
+          />
         </div>
 
         <div className="create-listing-form-group full-width">
@@ -165,7 +178,7 @@ const BasicInfo = ({ setStep, setFormData, formData }: props) => {
           ></textarea>
           <div className="character-counter">
             <span className="counter-number">1</span>/
-            <span className="counter-text">500 characters minimum</span>
+            <span className="counter-text">500 characters</span>
           </div>
         </div>
       </div>

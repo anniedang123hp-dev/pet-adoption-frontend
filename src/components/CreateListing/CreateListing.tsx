@@ -29,15 +29,17 @@ const CreateListing = () => {
   const [step, setStep] = useState(0);
 
   useEffect(() => {
-    console.log(`Line 28 the name is ${formData.gender}`);
-  }, [formData.gender]);
+    console.log(`Line 28 the name is ${JSON.stringify(formData, null, 2)}`);
+  }, [formData]);
 
   return (
     <>
       {step === 0 && <BasicInfo setStep={setStep} setFormData={setFormData} formData={formData} />}
-      {step === 1 && <HealthInfo setStep={setStep} setFormData={setFormData} />}
-      {step === 2 && <LocationInfo setStep={setStep} setFormData={setFormData} />}
-      {step === 3 && <Review setStep={setStep} />}
+      {step === 1 && <HealthInfo setStep={setStep} setFormData={setFormData} formData={formData} />}
+      {step === 2 && (
+        <LocationInfo setStep={setStep} setFormData={setFormData} formData={formData} />
+      )}
+      {step === 3 && <Review setStep={setStep} formData={formData} />}
     </>
   );
 };

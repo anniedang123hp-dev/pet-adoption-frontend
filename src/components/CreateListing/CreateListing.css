@@ -239,14 +239,28 @@ select {
 }
 
 .preview-img-summary-container {
+  display: flex;
+  flex-direction: column;
+  /* align-items: center; */
   padding: 1rem;
   font-size: 12px;
-  text-align: center;
   color: #605454;
 }
 
 .preview-img-container {
 
+}
+
+.preview-summary-container {
+  width: 250px;
+}
+
+.preview-basic-info-container {
+  font-size: 14px;
+}
+
+.preview-remain-info-container {
+  font-size: 14px;
 }
 
 .preview-img {

@@ -7,9 +7,10 @@ import type { PetFormData } from '../../types/petForm';
 interface props {
   setStep: Dispatch<SetStateAction<number>>;
   setFormData: Dispatch<SetStateAction<PetFormData>>;
+  formData: PetFormData;
 }
 
-const LocationInfo = ({ setStep }: props) => {
+const LocationInfo = ({ setStep, setFormData, formData }: props) => {
   const handleNextStep = () => {
     setStep(3);
   };
@@ -17,6 +18,14 @@ const LocationInfo = ({ setStep }: props) => {
   const handlePrevStep = () => {
     setStep(1);
   };
+
+  const handleChange = (field: string, value: string) => {
+    setFormData((prev) => ({
+      ...prev,
+      [field]: value,
+    }));
+  };
+
   return (
     <div className="create-listing-container">
       {/* Progress Steps */}
@@ -61,7 +70,7 @@ const LocationInfo = ({ setStep }: props) => {
           <label>
             State <span className="create-listing-required">*</span>
           </label>
-          <select>
+          <select onChange={(e) => handleChange('state', e.target.value)} value={formData.state}>
             <option value="All">Select state</option>
             <option value="SA">South Australia</option>
             <option value="NSW">New South Wales</option>
@@ -76,7 +85,12 @@ const LocationInfo = ({ setStep }: props) => {
           <label>
             City/Suburb <span className="create-listing-required">*</span>
           </label>
-          <input type="text" placeholder="Enter your city/suburb ..." />
+          <input
+            type="text"
+            value={formData.suburb}
+            placeholder="Enter your city/suburb ..."
+            onChange={(e) => handleChange('suburb', e.target.value)}
+          />
         </div>
       </div>
 
@@ -87,13 +101,16 @@ const LocationInfo = ({ setStep }: props) => {
           <label>
             Reason for rehoming <span className="create-listing-required">*</span>
           </label>
-          <select>
+          <select
+            onChange={(e) => handleChange('rehomeReason', e.target.value)}
+            value={formData.rehomeReason}
+          >
             <option value="">Select</option>
-            <option value="mixed">Owner passed away</option>
-            <option value="labrador">Family circumstances changed</option>
-            <option value="german-shepherd">Pet too energetic for household</option>
-            <option value="golden-retriever">Health issues (owner)</option>
-            <option value="golden-retriever">Other</option>
+            <option value="owner_passed_away">Owner passed away</option>
+            <option value="family_change">Family circumstances changed</option>
+            <option value="too_energetic">Pet too energetic for household</option>
+            <option value="owner_health">Health issues (owner)</option>
+            <option value="other">Other</option>
           </select>
         </div>
 
@@ -101,10 +118,13 @@ const LocationInfo = ({ setStep }: props) => {
           <label>
             Adoption Types <span className="create-listing-required">*</span>
           </label>
-          <select>
+          <select
+            onChange={(e) => handleChange('adoptionType', e.target.value)}
+            value={formData.adoptionType}
+          >
             <option value="">Select</option>
-            <option value="mixed">Local Only</option>
-            <option value="labrador">Interstate Allowed</option>
+            <option value="local">Local Only</option>
+            <option value="insterstate">Interstate Allowed</option>
           </select>
         </div>
       </div>

@@ -5,16 +5,19 @@ import {
   faBriefcaseMedical,
   faLocationDot,
   faCheck,
+  faX,
 } from '@fortawesome/free-solid-svg-icons';
 
 import { faFileLines } from '@fortawesome/free-regular-svg-icons';
 import DOG_IMG from '../../assets/dog.jpg';
+import type { PetFormData } from '../../types/petForm';
 
 interface props {
   setStep: Dispatch<SetStateAction<number>>;
+  formData: PetFormData;
 }
 
-const Review = ({ setStep }: props) => {
+const Review = ({ setStep, formData }: props) => {
   const handlePrevStep = () => {
     setStep(2);
   };
@@ -65,39 +68,71 @@ const Review = ({ setStep }: props) => {
             <img src={DOG_IMG} alt="FurBridge Logo" className="preview-img" />
           </div>
           <div className="preview-summary-container">
-            <p>No brief summary provided!</p>
+            <p> {formData.description ? formData.description : 'No brief summary provided'}</p>
           </div>
         </div>
 
         <div className="preview-basic-info-container">
-          <h4>Max</h4>
-          <p>Golden Retriever</p>
-          <p>2 years 3 months</p>
-          <p>Female</p>
-          <p>Insterstate Only</p>
-          <p>Reason for rehoming</p>
-          <p> 📍 Adelaide SA</p>
+          <h4>{formData.name}</h4>
+          <p>{formData.breed}</p>
+          <p>{formData.age}</p>
+          <p>{formData.gender}</p>
+          <p>{formData.adoptionType}</p>
+          <p>{formData.rehomeReason}</p>
+          <p>
+            {' '}
+            📍 {formData.suburb}, {formData.state}
+          </p>
         </div>
 
         <div className="preview-remain-info-container">
           <h4>Medical Status</h4>
           <p>
-            <FontAwesomeIcon icon={faCheck} style={{ color: '#6BA70C' }} /> Desexed
+            {formData.desexed ? (
+              <FontAwesomeIcon icon={faCheck} style={{ color: '#6BA70C' }} />
+            ) : (
+              <FontAwesomeIcon icon={faX} style={{ color: '#B73838' }} />
+            )}{' '}
+            Desexed
           </p>
           <p>
-            <FontAwesomeIcon icon={faCheck} style={{ color: '#6BA70C' }} /> Vaccinated
+            {formData.vaccinated ? (
+              <FontAwesomeIcon icon={faCheck} style={{ color: '#6BA70C' }} />
+            ) : (
+              <FontAwesomeIcon icon={faX} style={{ color: '#B73838' }} />
+            )}{' '}
+            Vaccinated
           </p>
           <p>
-            <FontAwesomeIcon icon={faCheck} style={{ color: '#6BA70C' }} /> Microchipped
+            {formData.microchipped ? (
+              <FontAwesomeIcon icon={faCheck} style={{ color: '#6BA70C' }} />
+            ) : (
+              <FontAwesomeIcon icon={faX} style={{ color: '#B73838' }} />
+            )}{' '}
+            Microchipped
           </p>
           <p>
-            <FontAwesomeIcon icon={faCheck} style={{ color: '#6BA70C' }} /> Flea & Worm Treated
+            {formData.fleaWormTreated ? (
+              <FontAwesomeIcon icon={faCheck} style={{ color: '#6BA70C' }} />
+            ) : (
+              <FontAwesomeIcon icon={faX} style={{ color: '#B73838' }} />
+            )}{' '}
+            Flea & Worm Treated
           </p>
           <p>
-            <FontAwesomeIcon icon={faCheck} style={{ color: '#6BA70C' }} /> Good with kids
+            {formData.kidsFriendly ? (
+              <FontAwesomeIcon icon={faCheck} style={{ color: '#6BA70C' }} />
+            ) : (
+              <FontAwesomeIcon icon={faX} style={{ color: '#B73838' }} />
+            )}{' '}
+            Good with kids
           </p>
           <p>
-            <FontAwesomeIcon icon={faCheck} style={{ color: '#6BA70C' }} />
+            {formData.otherPetsFriendly ? (
+              <FontAwesomeIcon icon={faCheck} style={{ color: '#6BA70C' }} />
+            ) : (
+              <FontAwesomeIcon icon={faX} style={{ color: '#B73838' }} />
+            )}{' '}
             Good with other pets
           </p>
         </div>
