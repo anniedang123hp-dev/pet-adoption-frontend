@@ -255,6 +255,9 @@ select {
   width: 250px;
 }
 
+.preview-summary {
+  white-space: pre-wrap;
+}
 .preview-basic-info-container {
   font-size: 14px;
 }

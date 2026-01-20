@@ -11,7 +11,8 @@ interface props {
 }
 
 const BasicInfo = ({ setStep, setFormData, formData }: props) => {
-  const handleNextStep = () => {
+  const handleNextStep = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault(); // stop form submission
     setStep(2);
   };
 
@@ -22,7 +23,8 @@ const BasicInfo = ({ setStep, setFormData, formData }: props) => {
   const handleChange = (field: string, value: string) => {
     setFormData((prev) => ({
       ...prev,
-      [field]: value === 'true',
+      // [field]: value === 'true',
+      [field]: value === '' ? null : value === 'true',
     }));
   };
   return (
@@ -66,99 +68,108 @@ const BasicInfo = ({ setStep, setFormData, formData }: props) => {
       {/* Basic Information Section  */}
       <h2 className="section-title">Medical Status</h2>
 
-      <div className="create-listing-form-grid">
-        <div className="create-listing-form-group">
-          <label>
-            Desexed <span className="create-listing-required">*</span>
-          </label>
-          <select
-            onChange={(e) => handleChange('desexed', e.target.value)}
-            value={String(formData.desexed)}
-          >
-            <option value="">Select</option>
-            <option value="true">Yes</option>
-            <option value="false">No</option>
-          </select>
-        </div>
+      <form onSubmit={(e) => handleNextStep(e)}>
+        <div className="create-listing-form-grid">
+          <div className="create-listing-form-group">
+            <label>
+              Desexed <span className="create-listing-required">*</span>
+            </label>
+            <select
+              onChange={(e) => handleChange('desexed', e.target.value)}
+              value={String(formData.desexed)}
+              required
+            >
+              <option value="">Select</option>
+              <option value="true">Yes</option>
+              <option value="false">No</option>
+            </select>
+          </div>
 
-        <div className="create-listing-form-group">
-          <label>
-            Vaccinated <span className="create-listing-required">*</span>
-          </label>
-          <select
-            onChange={(e) => handleChange('vaccinated', e.target.value)}
-            value={String(formData.vaccinated)}
-          >
-            <option value="">Select</option>
-            <option value="true">Yes</option>
-            <option value="false">No</option>
-          </select>
-        </div>
+          <div className="create-listing-form-group">
+            <label>
+              Vaccinated <span className="create-listing-required">*</span>
+            </label>
+            <select
+              onChange={(e) => handleChange('vaccinated', e.target.value)}
+              value={String(formData.vaccinated)}
+              required
+            >
+              <option value="">Select</option>
+              <option value="true">Yes</option>
+              <option value="false">No</option>
+            </select>
+          </div>
 
-        <div className="create-listing-form-group">
-          <label>
-            Microchipped <span className="create-listing-required">*</span>
-          </label>
-          <select
-            onChange={(e) => handleChange('microchipped', e.target.value)}
-            value={String(formData.microchipped)}
-          >
-            <option value="">Select</option>
-            <option value="true">Yes</option>
-            <option value="false">No</option>
-          </select>
-        </div>
+          <div className="create-listing-form-group">
+            <label>
+              Microchipped <span className="create-listing-required">*</span>
+            </label>
+            <select
+              onChange={(e) => handleChange('microchipped', e.target.value)}
+              value={String(formData.microchipped)}
+              required
+            >
+              <option value="">Select</option>
+              <option value="true">Yes</option>
+              <option value="false">No</option>
+            </select>
+          </div>
 
-        <div className="create-listing-form-group">
-          <label>
-            Flea & Worm Treated <span className="create-listing-required">*</span>
-          </label>
-          <select
-            onChange={(e) => handleChange('fleaWormTreated', e.target.value)}
-            value={String(formData.fleaWormTreated)}
-          >
-            <option value="">Select</option>
-            <option value="true">Yes</option>
-            <option value="false">No</option>
-          </select>
-        </div>
+          <div className="create-listing-form-group">
+            <label>
+              Flea & Worm Treated <span className="create-listing-required">*</span>
+            </label>
+            <select
+              onChange={(e) => handleChange('fleaWormTreated', e.target.value)}
+              value={String(formData.fleaWormTreated)}
+              required
+            >
+              <option value="">Select</option>
+              <option value="true">Yes</option>
+              <option value="false">No</option>
+            </select>
+          </div>
 
-        <div className="create-listing-form-group">
-          <label>
-            Good with kids <span className="create-listing-required">*</span>
-          </label>
-          <select
-            onChange={(e) => handleChange('kidsFriendly', e.target.value)}
-            value={String(formData.kidsFriendly)}
-          >
-            <option value="">Select</option>
-            <option value="true">Yes</option>
-            <option value="false">No</option>
-          </select>
-        </div>
+          <div className="create-listing-form-group">
+            <label>
+              Good with kids <span className="create-listing-required">*</span>
+            </label>
+            <select
+              onChange={(e) => handleChange('kidsFriendly', e.target.value)}
+              value={String(formData.kidsFriendly)}
+              required
+            >
+              <option value="">Select</option>
+              <option value="true">Yes</option>
+              <option value="false">No</option>
+            </select>
+          </div>
 
-        <div className="create-listing-form-group">
-          <label>
-            Good with other pets <span className="create-listing-required">*</span>
-          </label>
-          <select
-            onChange={(e) => handleChange('otherPetsFriendly', e.target.value)}
-            value={String(formData.otherPetsFriendly)}
-          >
-            <option value="">Select</option>
-            <option value="true">Yes</option>
-            <option value="false">No</option>
-          </select>
+          <div className="create-listing-form-group">
+            <label>
+              Good with other pets <span className="create-listing-required">*</span>
+            </label>
+            <select
+              onChange={(e) => handleChange('otherPetsFriendly', e.target.value)}
+              value={String(formData.otherPetsFriendly)}
+              required
+            >
+              <option value="">Select</option>
+              <option value="true">Yes</option>
+              <option value="false">No</option>
+            </select>
+          </div>
         </div>
-      </div>
-      <div className="create-listing-btn-container">
-        <button className="skip-create-listing-btn" onClick={handlePrevStep}>
-          Previous
-        </button>
-        <button className="submit-create-listing-btn" type="submit" onClick={handleNextStep}>
-          Next
-        </button>
-      </div>
+        <div className="create-listing-btn-container">
+          <button className="skip-create-listing-btn" onClick={handlePrevStep}>
+            Previous
+          </button>
+          {/* <button className="submit-create-listing-btn" type="submit" onClick={handleNextStep}> */}
+          <button className="submit-create-listing-btn" type="submit">
+            Next
+          </button>
+        </div>
+      </form>
     </div>
   );
 };

@@ -8,12 +8,12 @@ export interface PetFormData {
   breed: string;
   description: string;
 
-  desexed: boolean;
-  vaccinated: boolean;
-  microchipped: boolean;
-  fleaWormTreated: boolean;
-  kidsFriendly: boolean;
-  otherPetsFriendly: boolean;
+  desexed: boolean | null;
+  vaccinated: boolean | null;
+  microchipped: boolean | null;
+  fleaWormTreated: boolean | null;
+  kidsFriendly: boolean | null;
+  otherPetsFriendly: boolean | null;
 
   state: string;
   suburb: string;

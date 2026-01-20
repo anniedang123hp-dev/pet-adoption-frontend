@@ -68,7 +68,10 @@ const Review = ({ setStep, formData }: props) => {
             <img src={DOG_IMG} alt="FurBridge Logo" className="preview-img" />
           </div>
           <div className="preview-summary-container">
-            <p> {formData.description ? formData.description : 'No brief summary provided'}</p>
+            <p className="preview-summary">
+              {' '}
+              {formData.description ? formData.description : 'No brief summary provided'}
+            </p>
           </div>
         </div>
 

@@ -13,9 +13,11 @@ interface props {
 }
 
 const BasicInfo = ({ setStep, setFormData, formData }: props) => {
-  const handleStep = () => {
+  const MAX_LENGTH = 500;
+
+  const handleStep = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault(); // stop form submission
     setStep(1);
-    console.log(`Go to 2nd step`);
   };
 
   const handleChange = (field: string, value: string) => {
@@ -91,103 +93,108 @@ const BasicInfo = ({ setStep, setFormData, formData }: props) => {
       {/* Basic Information Section  */}
       <h2 className="section-title">Basic Information</h2>
 
-      <div className="create-listing-form-grid">
-        <div className="create-listing-form-group">
-          <label>
-            Pet Name <span className="create-listing-required">*</span>
-          </label>
-          <input
-            type="text"
-            value={formData.name}
-            placeholder="Enter your pet name ..."
-            onChange={(e) => handleChange('name', e.target.value)}
-            required
-          />
-        </div>
+      <form onSubmit={(e) => handleStep(e)}>
+        <div className="create-listing-form-grid">
+          <div className="create-listing-form-group">
+            <label>
+              Pet Name <span className="create-listing-required">*</span>
+            </label>
+            <input
+              type="text"
+              value={formData.name}
+              placeholder="Enter your pet name ..."
+              onChange={(e) => handleChange('name', e.target.value)}
+              required
+            />
+          </div>
 
-        <div className="create-listing-form-group">
-          <label>
-            Species <span className="create-listing-required">*</span>
-          </label>
-          <select
-            onChange={(e) => handleChange('species', e.target.value)}
-            value={formData.species}
-            required
-          >
-            <option value="">Select</option>
-            <option value="dog">Dog</option>
-            <option value="cat">Cat</option>
-            <option value="other">Other</option>
-          </select>
-        </div>
+          <div className="create-listing-form-group">
+            <label>
+              Species <span className="create-listing-required">*</span>
+            </label>
+            <select
+              onChange={(e) => handleChange('species', e.target.value)}
+              value={formData.species}
+              required
+            >
+              <option value="">Select</option>
+              <option value="dog">Dog</option>
+              <option value="cat">Cat</option>
+              <option value="other">Other</option>
+            </select>
+          </div>
 
-        <div className="create-listing-form-group">
-          <label>
-            Gender <span className="create-listing-required">*</span>
-          </label>
-          <select
-            onChange={(e) => handleChange('gender', e.target.value)}
-            value={formData.gender}
-            required
-          >
-            <option value="">Select</option>
-            <option value="male">Male</option>
-            <option value="female">Female</option>
-          </select>
-        </div>
+          <div className="create-listing-form-group">
+            <label>
+              Gender <span className="create-listing-required">*</span>
+            </label>
+            <select
+              onChange={(e) => handleChange('gender', e.target.value)}
+              value={formData.gender}
+              required
+            >
+              <option value="">Select</option>
+              <option value="male">Male</option>
+              <option value="female">Female</option>
+            </select>
+          </div>
 
-        <div className="create-listing-form-group">
-          <label>
-            Age <span className="create-listing-required">*</span>
-          </label>
-          <select
-            onChange={(e) => handleChange('age', e.target.value)}
-            value={formData.age}
-            required
-          >
-            <option value="">Select</option>
-            <option value="puppy">Puppy/Kitten</option>
-            <option value="young">Young</option>
-            <option value="adult">Adult</option>
-            <option value="senior">Senior</option>
-          </select>
-        </div>
+          <div className="create-listing-form-group">
+            <label>
+              Age <span className="create-listing-required">*</span>
+            </label>
+            <select
+              onChange={(e) => handleChange('age', e.target.value)}
+              value={formData.age}
+              required
+            >
+              <option value="">Select</option>
+              <option value="puppy">Puppy/Kitten</option>
+              <option value="young">Young</option>
+              <option value="adult">Adult</option>
+              <option value="senior">Senior</option>
+            </select>
+          </div>
 
-        <div className="create-listing-form-group full-width">
-          <label>
-            Breed <span className="create-listing-required">*</span>
-          </label>
-          <input
-            type="text"
-            value={formData.breed}
-            placeholder="Enter your pet breed ..."
-            onChange={(e) => handleChange('breed', e.target.value)}
-            required
-          />
-        </div>
+          <div className="create-listing-form-group full-width">
+            <label>
+              Breed <span className="create-listing-required">*</span>
+            </label>
+            <input
+              type="text"
+              value={formData.breed}
+              placeholder="Enter your pet breed ..."
+              onChange={(e) => handleChange('breed', e.target.value)}
+              required
+            />
+          </div>
 
-        <div className="create-listing-form-group full-width">
-          <label>
-            Pet Story <span className="create-listing-required">*</span>
-          </label>
-          <textarea
-            placeholder="Tell us about your pet's personality, background, and what makes them special..."
-            onChange={(e) => handleChange('description', e.target.value)}
-            defaultValue={formData.description}
-            required
-          ></textarea>
-          <div className="character-counter">
-            <span className="counter-number">1</span>/
-            <span className="counter-text">500 characters</span>
+          <div className="create-listing-form-group full-width">
+            <label>
+              Pet Story <span className="create-listing-required">*</span>
+            </label>
+            <textarea
+              placeholder="Tell us about your pet's personality, background, and what makes them special..."
+              onChange={(e) => handleChange('description', e.target.value)}
+              defaultValue={formData.description}
+              maxLength={MAX_LENGTH}
+              required
+            ></textarea>
+            <div className="character-counter">
+              <span className="counter-number">{formData.description.length}</span>/
+              <span className="counter-text">500 characters</span>
+            </div>
           </div>
         </div>
-      </div>
-      <div className="create-listing-btn-container">
-        <button className="skip-create-listing-btn">Previous</button>
-        <button className="submit-create-listing-btn" type="submit" onClick={handleStep}>
-          Next
-        </button>
-      </div>
+
+        <div className="create-listing-btn-container">
+          <button className="skip-create-listing-btn">Previous</button>
+          {/* <button className="submit-create-listing-btn" type="submit" onClick={handleStep}> */}
+          <button className="submit-create-listing-btn" type="submit">
+            Next
+          </button>
+        </div>
+      </form>
     </div>
   );
 };
